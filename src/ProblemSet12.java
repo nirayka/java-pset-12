@@ -55,6 +55,23 @@ public class ProblemSet12 {
             return base;
         }
     }
+
+    public String changeXY(String text) {
+
+        if (text == null) {
+            return null;
+        }
+
+        if (text.length() == 0) {
+            return text;
+        }
+        if (text.charAt(0) == 'x') {
+            return 'y' + changeXY(text.substring(1));
+        }
+        return text.charAt(0) + changeXY(text.substring(1));
+
+    }
+    
     public int array11(int[] data, int index) {
         if (data == null || index < 0 || index > data.length-1) {
             return -1;
