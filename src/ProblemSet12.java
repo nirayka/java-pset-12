@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class ProblemSet12 {
-
     public long factorial(int n) {
         if (n <= 0) {
             return -1;
@@ -17,7 +16,7 @@ public class ProblemSet12 {
             return -1;
         } else if (n == 0) {
             return 0;
-        } else if (n == 1 || n == 2) {
+        } else if (n == 1) {
             return 1;
         } else {
             return fibonacci(n-1) + fibonacci(n-2);
@@ -39,6 +38,8 @@ public class ProblemSet12 {
     public long sumDigits(int n) {
         if (n < 0) {
             return -1;
+        } else if (n != Math.floor(n)) {
+            return -1;
         } else if (n == 0) {
             return 0;
         } else {
@@ -49,7 +50,7 @@ public class ProblemSet12 {
     public long powerN(int base, int exponent) {
         if (exponent < 1 || base < 1) {
             return -1;
-        } else if (exponent != 1) {
+        } else if (exponent > 1) {
             return base * powerN(base, exponent-1);
         } else {
             return base;
@@ -57,23 +58,19 @@ public class ProblemSet12 {
     }
 
     public String changeXY(String text) {
-
         if (text == null) {
             return null;
-        }
-
-        if (text.length() == 0) {
+        } else if (text.length() == 0) {
             return text;
-        }
-        if (text.charAt(0) == 'x') {
+        } else if (text.charAt(0) == 'x') {
             return 'y' + changeXY(text.substring(1));
+        } else {
+            return text.charAt(0) + changeXY(text.substring(1));
         }
-        return text.charAt(0) + changeXY(text.substring(1));
-
     }
     
     public int array11(int[] data, int index) {
-        if (data == null || index < 0 || index > data.length-1) {
+        if (data == null || index < 0 || index > data.length - 1) {
             return -1;
         }
 
@@ -82,7 +79,7 @@ public class ProblemSet12 {
             count += 1;
         }
 
-        if (index == data.length-1) {
+        if (index == data.length - 1) {
             return count;
         } else {
             return count+array11(data, index+1);
@@ -92,17 +89,13 @@ public class ProblemSet12 {
     public int strCount(String text, String sub) {
         if (text == null || sub == null || sub.length() == 0) {
             return -1;
-        }
-
-        if (text.length() < sub.length()) {
+        } else if (text.length() < sub.length()) {
             return 0;
-        }
-
-        if (text.substring(0, sub.length()).equals(sub)) {
+        } else if (text.substring(0, sub.length()).equals(sub)) {
             return 1 + strCount(text.substring(sub.length()), sub);
+        } else {
+            return strCount(text.substring(1), sub);
         }
-
-        return strCount(text.substring(1), sub);
     }
 
     public boolean strCopies(String text, String sub, int n) {
@@ -112,32 +105,26 @@ public class ProblemSet12 {
 
         if (text.length() < sub.length()) {
             return (n <= 0);
-        }
-
-        if (text.substring(0, sub.length()).equals(sub)) {
+        } else if (text.substring(0, sub.length()).equals(sub)) {
             return strCopies(text.substring(1), sub, n - 1);
+        } else {
+            return strCopies(text.substring(1), sub, n);
         }
-
-        return strCopies(text.substring(1), sub, n);
     }
 
     public int strDist(String text, String sub) {
         if (text == null || sub == null || sub.length() == 0) {
             return -1;
-        }
-
-        if (text.indexOf(sub) == -1) {
+        } else if (!text.contains(sub)) {
             return 0;
         }
 
         if (text.substring(0, sub.length()).equals(sub) && text.substring(text.length()-sub.length()).equals(sub)) {
             return text.length();
-        }
-
-        if (!text.substring(0, sub.length()).equals(sub)) {
+        } else if (!text.substring(0, sub.length()).equals(sub)) {
             return strDist(text.substring(1), sub);
+        } else {
+            return strDist(text.substring(0, text.length() - 1), sub);
         }
-
-        return strDist(text.substring(0, text.length() - 1), sub);
     }
 }
