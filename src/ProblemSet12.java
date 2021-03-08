@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class ProblemSet12 {
     public long factorial(int n) {
         if (n <= 0) {
