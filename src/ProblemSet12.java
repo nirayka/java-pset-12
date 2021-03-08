@@ -55,24 +55,72 @@ public class ProblemSet12 {
             return base;
         }
     }
-
-    public String changeXY(String text) {
-
-    }
-
     public int array11(int[] data, int index) {
+        if (data == null || index < 0 || index > data.length-1) {
+            return -1;
+        }
 
+        int count = 0;
+        if (data[index] == 11) {
+            count += 1;
+        }
+
+        if (index == data.length-1) {
+            return count;
+        } else {
+            return count+array11(data, index+1);
+        }
     }
 
     public int strCount(String text, String sub) {
+        if (text == null || sub == null || sub.length() == 0) {
+            return -1;
+        }
 
+        if (text.length() < sub.length()) {
+            return 0;
+        }
+
+        if (text.substring(0, sub.length()).equals(sub)) {
+            return 1 + strCount(text.substring(sub.length()), sub);
+        }
+
+        return strCount(text.substring(1), sub);
     }
 
     public boolean strCopies(String text, String sub, int n) {
+        if (text == null || sub == null || sub.length() == 0 || n < 0) {
+            return false;
+        }
 
+        if (text.length() < sub.length()) {
+            return (n <= 0);
+        }
+
+        if (text.substring(0, sub.length()).equals(sub)) {
+            return strCopies(text.substring(1), sub, n - 1);
+        }
+
+        return strCopies(text.substring(1), sub, n);
     }
 
     public int strDist(String text, String sub) {
+        if (text == null || sub == null || sub.length() == 0) {
+            return -1;
+        }
 
+        if (text.indexOf(sub) == -1) {
+            return 0;
+        }
+
+        if (text.substring(0, sub.length()).equals(sub) && text.substring(text.length()-sub.length()).equals(sub)) {
+            return text.length();
+        }
+
+        if (!text.substring(0, sub.length()).equals(sub)) {
+            return strDist(text.substring(1), sub);
+        }
+
+        return strDist(text.substring(0, text.length() - 1), sub);
     }
 }
